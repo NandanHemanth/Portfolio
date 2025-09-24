@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+.App {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.rube-goldberg-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.machine-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.machine-overlay h1,
+.machine-overlay p,
+.machine-overlay .ml-tags {
+  pointer-events: auto;
+}
+
+.ml-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .rube-goldberg-container h1 {
+    font-size: 2rem !important;
+    left: 20px !important;
+    top: 30px !important;
+  }
+
+  .rube-goldberg-container p {
+    font-size: 1.2rem !important;
+    left: 20px !important;
+    top: 100px !important;
+  }
+
+  .ml-tags {
+    left: 20px !important;
+    bottom: 20px !important;
+    right: 20px;
+  }
+
+  .ml-tags span {
+    font-size: 0.8rem !important;
+    padding: 6px 12px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  div[style*="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 60px 20px !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .rube-goldberg-container {
+    height: 300px;
+  }
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+section {
+  width: 100%;
+  min-height: fit-content;
+}
+
+canvas {
+  display: block;
+  outline: none;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulsing {
+  animation: pulse 2s ease-in-out infinite;
+}
