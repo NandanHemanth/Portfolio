@@ -1,0 +1,278 @@
+.game-board {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+  padding: 120px 2rem 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.progress-container {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #64ffda, #00ffff);
+  border-radius: 3px;
+  transition: width 1s ease-out;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-text {
+  font-family: 'Rajdhani', sans-serif;
+  color: #64ffda;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.journey-map {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.journey-path {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.level-container {
+  position: relative;
+  z-index: 5;
+}
+
+.level-node {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  margin: 1rem 0;
+  background: linear-gradient(145deg, rgba(10, 10, 10, 0.8), rgba(26, 26, 46, 0.6));
+  border: 2px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.level-node::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.level-node:hover::before {
+  opacity: 1;
+}
+
+.level-node.unlocked {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+}
+
+.level-node.unlocked:hover {
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 12px 40px rgba(0, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+.level-node.selected {
+  border-color: #00ffff;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+
+.level-node.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.8);
+}
+
+.level-node.education {
+  border-left: 4px solid #4CAF50;
+}
+
+.level-node.work {
+  border-left: 4px solid #2196F3;
+}
+
+.level-node.project {
+  border-left: 4px solid #FF9800;
+}
+
+.level-node.achievement {
+  border-left: 4px solid #E91E63;
+}
+
+.level-icon {
+  font-size: 3rem;
+  min-width: 80px;
+  text-align: center;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.level-info {
+  flex: 1;
+}
+
+.level-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 1px;
+}
+
+.level-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  color: #64ffda;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.level-period {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  color: #888;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lock-icon {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.journey-connector {
+  width: 4px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 auto;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.journey-connector.unlocked {
+  background: linear-gradient(180deg, #00ffff, #64ffda);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.journey-connector::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .game-board {
+    padding: 100px 1rem 2rem;
+  }
+
+  .level-node {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .level-icon {
+    font-size: 2.5rem;
+    min-width: auto;
+  }
+
+  .level-title {
+    font-size: 1.3rem;
+  }
+
+  .level-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .lock-overlay {
+    position: static;
+    transform: none;
+    width: 50px;
+    height: 50px;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .level-node {
+    margin: 0.5rem 0;
+    padding: 1rem;
+  }
+
+  .level-title {
+    font-size: 1.1rem;
+  }
+
+  .level-subtitle {
+    font-size: 1rem;
+  }
+
+  .level-icon {
+    font-size: 2rem;
+  }
+}
